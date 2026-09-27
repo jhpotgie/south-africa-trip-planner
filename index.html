@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#123a33" />
+  <meta name="description" content="Southern Africa 2027 mobile trip planner." />
+  <title>Southern Africa 2027 · Trip Planner</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="hero hero--safari">
+    <div class="hero__glow hero__glow--one"></div><div class="hero__glow hero__glow--two"></div>
+    <div class="hero__scrim"></div>
+    <div class="hero__inner hero__layout hero__layout--single">
+      <div class="hero__copy hero__copy--card">
+        <div class="eyebrow">SOUTHERN AFRICA · JAN 2027</div>
+        <h1><span>Our<br></span>'LEKKA'<br><span>South African trip.</span></h1>
+        <p class="hero__subtitle">Brisbane → Johannesburg → Golden Gate → Victoria Falls → Sabi Sand → Franschhoek → Cape Town → Johannesburg.</p>
+        <div class="hero__stats">
+          <div><strong id="countdownValue">—</strong><span id="countdownLabel">days to go</span></div>
+          <div><strong>25</strong><span>days</span></div>
+          <div><strong>2 → 10</strong><span>travellers</span></div>
+        </div>
+        <div class="hero__actions">
+          <button class="btn btn--light" data-jump="stays">View stays</button>
+          <button class="btn btn--ghost" data-jump="bookings">Bookings</button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <nav class="tabs" aria-label="Trip sections" data-horizontal-scroller>
+    <button class="scroll-arrow scroll-arrow--prev" type="button" data-scroll-prev aria-label="Show previous trip sections" aria-controls="tripSectionTabs">‹</button>
+    <div class="tabs__inner" id="tripSectionTabs" data-scroll-viewport tabindex="0" aria-label="Trip sections, horizontally scrollable">
+      <button class="tab is-active" data-section="trip" aria-current="page">Trip</button>
+      <button class="tab" data-section="stays">Stays</button>
+      <button class="tab" data-section="bookings">Bookings</button>
+      <button class="tab" data-section="explore">Explore</button>
+      <button class="tab" data-section="eat">Eat</button>
+      <button class="tab" data-section="lingo">Local Lingo</button>
+      <button class="tab" data-section="map">Map</button>
+      <button class="tab" data-section="health">Health &amp; Safety</button>
+      <button class="tab" data-section="pack">Pack</button>
+    </div>
+    <button class="scroll-arrow scroll-arrow--next" type="button" data-scroll-next aria-label="Show more trip sections" aria-controls="tripSectionTabs">›</button>
+    <div class="scroll-cue" aria-hidden="true" data-label-start="Swipe left for more sections" data-label-middle="Swipe left or right for more sections" data-label-end="Swipe right to go back">
+      <span data-scroll-label>Swipe left for more sections</span>
+      <span class="scroll-cue__bar"><i data-scroll-thumb></i></span>
+    </div>
+  </nav>
+
+  <main>
+    <section class="page is-active" id="trip">
+      <div class="wrap">
+        <div class="section-heading">
+          <div><div class="eyebrow eyebrow--dark">THE TRIP</div><h2>At a glance</h2></div>
+          <span class="pill pill--good">8 Jan – 1 Feb</span>
+        </div>
+        <div class="fun-strip">
+          <div class="fun-card"><span class="fun-card__icon">✈️</span><div><strong>2 → 10</strong><small>travellers</small></div></div>
+          <div class="fun-card"><span class="fun-card__icon">🦒</span><div><strong>Wildlife</strong><small>falls + safari</small></div></div>
+          <div class="fun-card"><span class="fun-card__icon">🍷</span><div><strong>Winelands</strong><small>Franschhoek</small></div></div>
+          <div class="fun-card"><span class="fun-card__icon">🐧</span><div><strong>Cape coast</strong><small>city + beaches</small></div></div>
+        </div>
+        <div class="notice notice--amber">
+          <strong>One accommodation still to book</strong>
+          <p>20–21 Jan: Nelspruit / White River for 10 travellers, before the transfer to Elephant Plains.</p>
+        </div>
+        <div class="notice notice--amber">
+          <strong>One flight still to book</strong>
+          <p>29 Jan: Cape Town → Johannesburg. The route is confirmed, but the specific flight is still TBC.</p>
+        </div>
+        <div class="journey" id="journeyStrip"></div>
+        <div class="grid grid--2 top-gap">
+          <article class="panel"><div class="panel__icon">👥</div><h3>Who is travelling?</h3><p><strong>8–18 Jan:</strong> Jan + partner. <strong>From Victoria Falls:</strong> the group becomes 10. The Qantas long-haul booking in this planner applies to Jan + partner.</p></article>
+          <article class="panel"><div class="panel__icon">🎨</div><h3>How to use this planner</h3><p>Keep the logistics firm and the rest flexible. On the Stays, Explore and Eat pages, tap through ideas and use the checklists and food-tag filters to shape the trip as you go.</p></article>
+        </div>
+        <div class="section-heading compact top-gap"><div><div class="eyebrow eyebrow--dark">NEXT ACTIONS</div><h2>Before you go</h2></div></div>
+        <div class="tasks" id="priorityTasks"></div>
+      </div>
+    </section>
+
+    <section class="page" id="stays">
+      <div class="wrap">
+        <div class="section-heading"><div><div class="eyebrow eyebrow--dark">BY LOCATION</div><h2>Stay periods &amp; ideas</h2></div></div>
+        <div class="fun-strip">
+          <div class="fun-card"><span class="fun-card__icon">🏡</span><div><strong>Dainfern</strong><small>family base</small></div></div>
+          <div class="fun-card"><span class="fun-card__icon">🏔️</span><div><strong>Kiara Lodge</strong><small>mountains</small></div></div>
+          <div class="fun-card"><span class="fun-card__icon">🐘</span><div><strong>Elephant Plains</strong><small>safari stay</small></div></div>
+          <div class="fun-card"><span class="fun-card__icon">🌆</span><div><strong>Cape Town</strong><small>city stay</small></div></div>
+        </div>
+        <div class="art-banner"><img class="art-banner__img" src="stays-banner.webp" alt="Playful illustrated Southern Africa accommodation collage" /></div>
+        <p class="lead">No rigid day plan. Each period shows the confirmed travel facts, where you’re staying, and a checklist of suggested activities to choose from.</p>
+        <div class="stay-list" id="stayList"></div>
+      </div>
+    </section>
+
+    <section class="page" id="bookings">
+      <div class="wrap">
+        <div class="section-heading"><div><div class="eyebrow eyebrow--dark">RESERVATIONS</div><h2>Confirmed &amp; to arrange</h2></div></div>
+        <div class="fun-strip">
+          <div class="fun-card"><span class="fun-card__icon">🎟️</span><div><strong>Tickets</strong><small>flights + stays</small></div></div>
+          <div class="fun-card"><span class="fun-card__icon">🧳</span><div><strong>Luggage</strong><small>moving often</small></div></div>
+          <div class="fun-card"><span class="fun-card__icon">🚐</span><div><strong>Transfers</strong><small>still to lock in</small></div></div>
+          <div class="fun-card"><span class="fun-card__icon">🏨</span><div><strong>Bases</strong><small>confirmed nights</small></div></div>
+        </div>
+        <div class="art-banner"><img class="art-banner__img" src="bookings-banner.webp" alt="Playful illustrated safari travel planning collage for bookings" /></div>
+        <div class="legend">
+          <span><i class="dot dot--confirmed"></i>Confirmed</span>
+          <span><i class="dot dot--owner"></i>Confirmed by you</span>
+          <span><i class="dot dot--todo"></i>To book / confirm</span>
+        </div>
+        <div class="booking-list" id="bookingList"></div>
+      </div>
+    </section>
+
+    <section class="page" id="explore">
+      <div class="wrap">
+        <div class="section-heading"><div><div class="eyebrow eyebrow--dark">TOP THINGS TO DO</div><h2>Explore by location</h2></div></div>
+        <p class="lead">Suggestions favour outdoor activity, wildlife, viewpoints and experiences with a strong sense of place.</p>
+        <div class="art-banner"><img class="art-banner__img" src="explore-banner.webp" alt="Playful illustrated travel collage for Southern Africa exploration" /></div>
+        <div class="destination-nav" id="destinationNav"></div>
+        <div class="explore-list" id="exploreList"></div>
+      </div>
+    </section>
+
+    <section class="page" id="eat">
+      <div class="wrap">
+        <div class="section-heading"><div><div class="eyebrow eyebrow--dark">EAT THE PLACE</div><h2>Food by location</h2></div></div>
+        <p class="lead">Biased toward meals that feel South African or Zimbabwean — braai, Cape Malay, gatsbys, koesisters, local stews and township food — rather than generic “top-rated” dining.</p>
+        <div class="art-banner"><img class="art-banner__img" src="eat-banner.webp" alt="Playful illustrated South African food collage" /></div>
+        <div class="filter-guide">Pick one food tag to focus the suggestions. Tap the selected tag again to return to all.</div>
+        <div class="horizontal-scroller horizontal-scroller--food" data-horizontal-scroller>
+          <button class="scroll-arrow scroll-arrow--prev" type="button" data-scroll-prev aria-label="Show previous food tags" aria-controls="foodQuest">‹</button>
+          <div class="food-quest" id="foodQuest" data-scroll-viewport tabindex="0" aria-label="Food tag filters, horizontally scrollable"></div>
+          <button class="scroll-arrow scroll-arrow--next" type="button" data-scroll-next aria-label="Show more food tags" aria-controls="foodQuest">›</button>
+          <div class="scroll-cue" aria-hidden="true" data-label-start="Swipe left for more food tags" data-label-middle="Swipe left or right for more food tags" data-label-end="Swipe right to go back">
+            <span data-scroll-label>Swipe left for more food tags</span>
+            <span class="scroll-cue__bar"><i data-scroll-thumb></i></span>
+          </div>
+        </div>
+        <div class="food-groups" id="foodGroups"></div>
+      </div>
+    </section>
+
+    <section class="page" id="lingo">
+      <div class="wrap">
+        <div class="section-heading"><div><div class="eyebrow eyebrow--dark">SPEAK LIKE A LOCAL</div><h2>Useful South African lingo</h2></div></div>
+        <p class="lead">A practical decoder for American travellers: friendly phrases to try, timing traps to understand, and words you may hear on the road.</p>
+        <div class="fun-strip">
+          <div class="fun-card"><span class="fun-card__icon">👋</span><div><strong>Howzit</strong><small>hello + how are you?</small></div></div>
+          <div class="fun-card"><span class="fun-card__icon">🌞</span><div><strong>Lekker</strong><small>nice, great, enjoyable</small></div></div>
+          <div class="fun-card"><span class="fun-card__icon">👌</span><div><strong>Sharp-sharp</strong><small>all good / see you</small></div></div>
+          <div class="fun-card"><span class="fun-card__icon">⏰</span><div><strong>Just now</strong><small>probably not right now</small></div></div>
+        </div>
+        <div class="notice notice--health">
+          <strong>Listen first, then join in</strong>
+          <p>South African English reflects a multilingual country, and usage varies by region, age and community. Recognition matters more than forcing an accent; the friendliest terms below are marked “Easy to try.”</p>
+        </div>
+        <div class="lingo-groups" id="lingoGroups"></div>
+        <div class="source-box top-gap">
+          <strong>Language sources</strong>
+          <p>Meanings and usage were checked against South African lexicography and current guidance for international visitors.</p>
+          <a href="https://dsae.co.za/" target="_blank" rel="noopener">Dictionary of South African English ↗</a>
+          <a href="https://files.su.ac.za/public/su-international/documents/2026-01/su-international-welcome-booklet-2026.pdf#page=36" target="_blank" rel="noopener">Stellenbosch University visitor guide ↗</a>
+          <a href="https://www.oxfordlearnersdictionaries.com/us/definition/english/sharp-sharp" target="_blank" rel="noopener">Oxford · sharp-sharp ↗</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="page" id="map">
+      <div class="wrap">
+        <div class="section-heading"><div><div class="eyebrow eyebrow--dark">THE ROUTE</div><h2>Illustrated route map</h2></div></div>
+        <div class="fun-strip">
+          <div class="fun-card"><span class="fun-card__icon">🚗</span><div><strong>Drive</strong><small>JHB ↔ Kiara</small></div></div>
+          <div class="fun-card"><span class="fun-card__icon">🛫</span><div><strong>Fly</strong><small>regional hops</small></div></div>
+          <div class="fun-card"><span class="fun-card__icon">🍇</span><div><strong>Franschhoek</strong><small>road trip leg</small></div></div>
+          <div class="fun-card"><span class="fun-card__icon">🌊</span><div><strong>Victoria Falls</strong><small>big scenery</small></div></div>
+        </div>
+        <p class="lead">A playful overview of the trip route: drive to Kiara Lodge, drive back to Johannesburg, fly to Victoria Falls, fly to Nelspruit, drive to Elephant Plains, drive to Hoedspruit, fly to Cape Town, drive to Franschhoek, drive back to Cape Town, then fly to Johannesburg.</p>
+        <div class="map-legend-row">
+          <span class="mini-pill mini-pill--drive">Drive / transfer</span>
+          <span class="mini-pill mini-pill--fly">Flight</span>
+        </div>
+        <article class="map-card map-card--solo">
+          <img class="illustrated-map" src="illustrated-route-map-v2.webp" alt="Illustrated caricature route map of the Southern Africa 2027 trip" />
+          <div class="map-card__caption">This map is intentionally illustrative rather than geographic. Use it as a fun trip overview.</div>
+        </article>
+        <div class="map-links" id="mapLinks"></div>
+      </div>
+    </section>
+
+    <section class="page" id="health">
+      <div class="wrap">
+        <div class="section-heading"><div><div class="eyebrow eyebrow--dark">HEALTH &amp; SAFETY</div><h2>Practical travel precautions</h2></div></div>
+        <div class="notice notice--health"><strong>Plan a travel-health appointment before departure</strong><p>This page is trip-specific general guidance, not medical advice. Medication and vaccination choices depend on the individual, so confirm them with a GP or travel-medicine clinician.</p></div>
+        <div class="risk-strip" id="riskStrip"></div>
+        <div class="health-grid" id="healthGrid"></div>
+        <div class="section-heading compact top-gap"><div><div class="eyebrow eyebrow--dark">USEFUL NUMBERS</div><h2>Keep offline</h2></div></div>
+        <div class="emergency-grid" id="emergencyGrid"></div>
+        <div class="source-box top-gap"><strong>Health &amp; safety sources</strong><p>Checked 26 Sep 2026 against Australian Smartraveller and CDC destination guidance. Advice can change before January 2027, so recheck shortly before departure.</p><div id="healthSources"></div></div>
+      </div>
+    </section>
+
+    <section class="page" id="pack">
+      <div class="wrap">
+        <div class="section-heading"><div><div class="eyebrow eyebrow--dark">PACKING</div><h2>Mountains, Falls, safari &amp; Cape</h2></div><button class="text-btn" id="resetPacking">Reset list</button></div>
+        <div class="fun-strip">
+          <div class="fun-card"><span class="fun-card__icon">🧳</span><div><strong>Pack light</strong><small>many stops</small></div></div>
+          <div class="fun-card"><span class="fun-card__icon">🦟</span><div><strong>Repellent</strong><small>malaria areas</small></div></div>
+          <div class="fun-card"><span class="fun-card__icon">🥾</span><div><strong>Walking shoes</strong><small>trails + cities</small></div></div>
+          <div class="fun-card"><span class="fun-card__icon">📸</span><div><strong>Camera kit</strong><small>wildlife + views</small></div></div>
+        </div>
+        <div class="packing-progress"><div id="packingProgressBar"></div></div>
+        <div class="packing-progress__label" id="packingProgressLabel">0 packed</div>
+        <div class="packing-grid" id="packingList"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer><div class="wrap footer__inner"><div><strong>Southern Africa 2027</strong><span>Research last checked 26 Sep 2026</span></div><button class="text-btn" id="sourcesButton">Sources &amp; assumptions</button></div></footer>
+
+  <dialog id="detailDialog" class="dialog"><button class="dialog__close" aria-label="Close">×</button><div id="dialogContent"></div></dialog>
+
+  <script src="app.js"></script>
+</body>
+</html>

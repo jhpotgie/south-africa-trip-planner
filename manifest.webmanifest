@@ -1,0 +1,8 @@
+{
+  "name":"Southern Africa 2027 Trip Planner",
+  "short_name":"SA 2027",
+  "start_url":"./index.html",
+  "display":"standalone",
+  "background_color":"#f6f2e9",
+  "theme_color":"#123a33"
+}
