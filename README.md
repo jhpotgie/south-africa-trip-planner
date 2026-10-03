@@ -1,6 +1,5 @@
-# Southern Africa 2027 Trip Planner — V4.1
+# Southern Africa 2027 Trip Planner — V5
 
-This version repositions the hero safari caricature so the full image is visible more cleanly in the headline area.
+Static, mobile-first trip planner for the January 2027 Southern Africa itinerary.
 
-Key change:
-- Hero artwork now uses a contain-style layout with adjusted sizing and positioning to keep the full safari caricature visible.
+Key features include itinerary and booking tracking, location-based stays and food ideas, local lingo, health and packing notes, a South African tasting checklist, and a reference-rate FX calculator that defaults to ZAR → USD.

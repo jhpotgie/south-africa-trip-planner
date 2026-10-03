@@ -264,6 +264,191 @@ function renderFoodGroups(){
 renderFoodFilters();
 renderFoodGroups();
 
+const tastingGroups = [
+  {
+    title:'Savoury, smoky & street-side',
+    intro:'Start with the portable snacks, then work up to the dishes worth building a meal around.',
+    items:[
+      {id:'biltong',icon:'🥩',name:'Biltong',badge:'Essential',text:'Air-cured, seasoned meat—usually beef or game. It is generally thicker, meatier and less sweet than American jerky.',tip:'Try a few cuts from a proper butcher or padstal; ask for lean, medium or fatty.'},
+      {id:'droewors',icon:'〰️',name:'Droëwors',badge:'Road-trip snack',text:'Dry-cured sausage with the coriander-led flavour of boerewors in an easy-to-pack snack.',tip:'Say “DROO-uh-vors.” Buy a bag alongside the biltong for padkos.'},
+      {id:'boerewors-roll',icon:'🌭',name:'Boerewors roll',badge:'Braai classic',text:'Coiled, coarsely minced South African sausage cooked over the coals and tucked into a roll.',tip:'Order a “boerie” with grilled onions and chakalaka if offered.'},
+      {id:'bunny-chow',icon:'🍛',name:'Bunny chow',badge:'Street food',text:'Durban-style curry served inside a hollowed loaf of bread. Despite the name, there is no rabbit involved.',tip:'A quarter-loaf is plenty for many people; use the bread lid to mop up the curry.'},
+      {id:'bobotie',icon:'🥘',name:'Bobotie',badge:'Cape classic',text:'Gently spiced minced meat, often with fruit or chutney notes, baked beneath a savoury egg-and-milk topping.',tip:'A good Cape Malay meal is the natural place to look for it.'},
+      {id:'pap-chakalaka',icon:'🔥',name:'Pap, chakalaka & shisa nyama',badge:'Eat together',text:'Maize porridge, spicy vegetable relish and meat grilled over fire—a combination built for sharing.',tip:'Try it at a braai or a reputable township dining experience rather than in isolation.'},
+      {id:'potjiekos',icon:'🍲',name:'Potjiekos',badge:'Slow food',text:'Meat and vegetables slowly cooked over coals in a three-legged cast-iron pot until rich and tender.',tip:'Best found at a family gathering, lodge dinner or venue that has time to cook it properly.'},
+      {id:'gatsby',icon:'🥖',name:'Cape Town Gatsby',badge:'Share it',text:'An enormous Cape sandwich packed with hot chips and fillings such as steak, chicken, polony or calamari.',tip:'Order one for the table—the over-the-top scale is part of the experience.'}
+    ]
+  },
+  {
+    title:'Something sweet',
+    intro:'South Africa does sticky, creamy and nostalgic desserts exceptionally well. The two similarly named fried treats are deliberately separate.',
+    items:[
+      {id:'koeksister',icon:'🍩',name:'Koeksister',badge:'Syrupy',text:'A plaited fried pastry soaked in cold syrup, with a crisp shell and very sweet, sticky centre.',tip:'Have one fresh with coffee; sharing is sensible if you are easing into the sweetness.'},
+      {id:'koesister',icon:'🥥',name:'Cape Malay koesister',badge:'Cape Town',text:'A soft, round, warmly spiced doughnut finished with syrup and coconut—distinct from the plaited koeksister.',tip:'A Sunday-morning bakery stop in Cape Town is the classic mission.'},
+      {id:'malva-pudding',icon:'🍮',name:'Malva pudding',badge:'Warm dessert',text:'A soft caramelised sponge served warm with a rich cream sauce, custard or ice cream.',tip:'Ideal after a braai or Cape meal; one of the easiest crowd-pleasers on the list.'},
+      {id:'melktert',icon:'🥧',name:'Melktert',badge:'Bakery stop',text:'A delicate milk-custard tart dusted with cinnamon, usually lighter than an American custard pie.',tip:'Try a slice from a bakery or farm stall with tea or coffee.'},
+      {id:'peppermint-crisp-tart',icon:'🍫',name:'Peppermint Crisp tart',badge:'Nostalgic',text:'A no-bake fridge tart layered with biscuits, caramel, cream and peppermint-chocolate crunch.',tip:'Look for it at a family table, casual restaurant or home-style deli.'}
+    ]
+  },
+  {
+    title:'Sip, sundowner & party round',
+    intro:'A mix of genuinely local signatures and one requested international party favourite. Alcohol-free rooibos absolutely counts.',
+    items:[
+      {id:'rooibos',icon:'🫖',name:'Rooibos tea',badge:'No alcohol',text:'Naturally caffeine-free herbal tea indigenous to South Africa, with an earthy, gently sweet character.',tip:'Try it plain first, then with milk, lemon or honey if that is how your host serves it.'},
+      {id:'cape-wine',icon:'🍷',name:'Pinotage or Cape Chenin Blanc',badge:'Winelands',text:'Pinotage is South Africa’s signature red grape; Chenin Blanc is another Cape strength with styles from crisp to rich.',tip:'Choose a guided tasting and let the group compare styles rather than chasing quantity.'},
+      {id:'amarula',icon:'🧊',name:'Amarula',badge:'Local liqueur',text:'Cream liqueur made with marula fruit, usually poured over ice or used in dessert cocktails.',tip:'Treat it as a small after-dinner pour—it is sweet, creamy and deceptively easy to drink.'},
+      {id:'dom-pedro',icon:'🥤',name:'Dom Pedro',badge:'Dessert cocktail',text:'A boozy, milkshake-like South African dessert drink, commonly blending vanilla ice cream with whisky or a liqueur.',tip:'Order it instead of dessert, not as a light pre-dinner drink.'},
+      {id:'springbokkie',icon:'🟢',name:'Springbokkie shot',badge:'Green + gold',text:'A layered green-and-gold shooter combining mint liqueur with a creamy marula-style liqueur.',tip:'Named for the Springboks colours; it is “Springbokkie,” even if someone casually says Springbok shot.'},
+      {id:'brandy-coke',icon:'🥃',name:'Brandy & Coke',badge:'Local order',text:'A hugely familiar South African mixed-drink order: local brandy, cola and plenty of ice.',tip:'Ask for a single and pace it—the generous home-pour version can be considerably stronger.'},
+      {id:'dry-cider',icon:'🍏',name:'South African dry cider',badge:'Easy sundowner',text:'A crisp bottled cider is a common warm-weather order; Savanna Dry is the best-known shorthand.',tip:'Serve it cold with lemon only if you like—the exact ritual inspires opinions.'},
+      {id:'jagerbomb',icon:'💥',name:'Jägerbomb',badge:'International',text:'Jägermeister dropped into an energy drink. It is a global party shot, included for the group night out rather than local heritage.',tip:'High caffeine can mask how intoxicated you feel, so keep this firmly in the one-and-done category.'}
+    ]
+  }
+];
+
+let tastingState = JSON.parse(localStorage.getItem('tripTastingV1') || '{}');
+const tastingItems = tastingGroups.flatMap(group => group.items);
+function renderTastingList(){
+  document.querySelector('#tryGroups').innerHTML = tastingGroups.map(group => `
+    <section class="try-group">
+      <div class="try-group__heading"><h3>${group.title}</h3><p>${group.intro}</p></div>
+      <div class="try-grid">${group.items.map(item => `
+        <label class="try-card ${tastingState[item.id] ? 'is-tried' : ''}">
+          <input type="checkbox" data-tasting="${item.id}" ${tastingState[item.id] ? 'checked' : ''}>
+          <span class="try-card__icon" aria-hidden="true">${item.icon}</span>
+          <span class="try-card__copy">
+            <span class="try-card__title"><strong>${item.name}</strong><small>${item.badge}</small></span>
+            <span class="try-card__text">${item.text}</span>
+            <span class="try-card__tip"><b>Try it:</b> ${item.tip}</span>
+          </span>
+        </label>
+      `).join('')}</div>
+    </section>
+  `).join('');
+  document.querySelectorAll('[data-tasting]').forEach(input => input.onchange = event => {
+    tastingState[event.target.dataset.tasting] = event.target.checked;
+    localStorage.setItem('tripTastingV1', JSON.stringify(tastingState));
+    renderTastingList();
+  });
+  const done = tastingItems.filter(item => tastingState[item.id]).length;
+  const percent = Math.round(done / tastingItems.length * 100);
+  document.querySelector('#tryProgressLabel').textContent = `${done} of ${tastingItems.length} tried`;
+  document.querySelector('#tryProgressPercent').textContent = `${percent}%`;
+  document.querySelector('#tryProgressBar').style.width = `${percent}%`;
+  document.querySelector('#tryProgressTrack').setAttribute('aria-valuemax', tastingItems.length);
+  document.querySelector('#tryProgressTrack').setAttribute('aria-valuenow', done);
+}
+renderTastingList();
+document.querySelector('#resetTryList').onclick = () => {
+  if(confirm('Reset the Things to Try checklist?')){
+    tastingState = {};
+    localStorage.removeItem('tripTastingV1');
+    renderTastingList();
+  }
+};
+
+const fxCurrencies = {
+  ZAR:{symbol:'R',locale:'en-ZA'},
+  USD:{symbol:'$',locale:'en-US'},
+  AUD:{symbol:'A$',locale:'en-AU'},
+  EUR:{symbol:'€',locale:'en-IE'},
+  GBP:{symbol:'£',locale:'en-GB'}
+};
+const fxAmount = document.querySelector('#fxAmount');
+const fxFrom = document.querySelector('#fxFrom');
+const fxTo = document.querySelector('#fxTo');
+const fxResult = document.querySelector('#fxResult');
+const fxStatus = document.querySelector('#fxStatus');
+let fxRate = null;
+let fxRateDate = '';
+let fxRequest = 0;
+
+function formatFxAmount(amount, currency){
+  return new Intl.NumberFormat(fxCurrencies[currency].locale, {
+    style:'currency',currency,minimumFractionDigits:2,maximumFractionDigits:2
+  }).format(amount);
+}
+function formatFxDate(date){
+  if(!date) return '';
+  const parsed = new Date(`${date}T12:00:00Z`);
+  return Number.isNaN(parsed.getTime()) ? date : new Intl.DateTimeFormat('en-US',{day:'numeric',month:'short',year:'numeric',timeZone:'UTC'}).format(parsed);
+}
+function renderFxQuickAmounts(){
+  document.querySelector('#fxQuickAmounts').innerHTML = [100,500,1000,5000].map(amount => `<button type="button" data-fx-amount="${amount}">${fxCurrencies[fxFrom.value].symbol}${amount.toLocaleString('en-US')}</button>`).join('');
+  document.querySelectorAll('[data-fx-amount]').forEach(button => button.onclick = () => {
+    fxAmount.value = button.dataset.fxAmount;
+    renderFxConversion();
+  });
+}
+function renderFxConversion(){
+  const amount = Number(fxAmount.value);
+  const validAmount = Number.isFinite(amount) && amount >= 0;
+  document.querySelector('#fxInputSymbol').textContent = fxCurrencies[fxFrom.value].symbol;
+  document.querySelector('#fxResultLabel').textContent = validAmount ? `${amount.toLocaleString('en-US',{maximumFractionDigits:2})} ${fxFrom.value} converts to` : 'Enter a valid amount';
+  if(!validAmount || fxRate === null){
+    fxResult.textContent = fxRate === null ? 'Rate unavailable' : '—';
+    document.querySelector('#fxRateLine').textContent = '';
+    return;
+  }
+  fxResult.textContent = `${formatFxAmount(amount * fxRate, fxTo.value)} ${fxTo.value}`;
+  document.querySelector('#fxRateLine').textContent = `1 ${fxFrom.value} = ${fxRate.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:6})} ${fxTo.value}`;
+}
+async function loadFxRate(force=false){
+  const request = ++fxRequest;
+  const from = fxFrom.value;
+  const to = fxTo.value;
+  renderFxQuickAmounts();
+  fxStatus.className = '';
+  if(from === to){
+    fxRate = 1;
+    fxRateDate = '';
+    fxStatus.textContent = 'Same currency selected · no conversion needed';
+    renderFxConversion();
+    return;
+  }
+  fxRate = null;
+  fxStatus.textContent = 'Fetching the latest reference rate…';
+  renderFxConversion();
+  const cacheKey = `tripFxRateV1:${from}:${to}`;
+  try{
+    const response = await fetch(`https://api.frankfurter.dev/v2/rate/${from.toLowerCase()}/${to.toLowerCase()}`, {cache:force ? 'reload' : 'default'});
+    if(!response.ok) throw new Error(`Rate request failed: ${response.status}`);
+    const data = await response.json();
+    if(!Number.isFinite(Number(data.rate))) throw new Error('Rate response was incomplete');
+    if(request !== fxRequest) return;
+    fxRate = Number(data.rate);
+    fxRateDate = data.date || '';
+    localStorage.setItem(cacheKey, JSON.stringify({rate:fxRate,date:fxRateDate,savedAt:Date.now()}));
+    fxStatus.textContent = `Reference rate dated ${formatFxDate(fxRateDate)}`;
+    renderFxConversion();
+  } catch(error){
+    if(request !== fxRequest) return;
+    const cached = JSON.parse(localStorage.getItem(cacheKey) || 'null');
+    if(cached && Number.isFinite(Number(cached.rate))){
+      fxRate = Number(cached.rate);
+      fxRateDate = cached.date || '';
+      fxStatus.className = 'is-cached';
+      fxStatus.textContent = `Offline saved rate dated ${formatFxDate(fxRateDate)}`;
+    } else {
+      fxRate = null;
+      fxStatus.className = 'is-error';
+      fxStatus.textContent = 'Could not load a rate · check your connection and try Refresh';
+    }
+    renderFxConversion();
+  }
+}
+fxAmount.addEventListener('input', renderFxConversion);
+fxFrom.addEventListener('change', () => loadFxRate());
+fxTo.addEventListener('change', () => loadFxRate());
+document.querySelector('#fxSwap').onclick = () => {
+  const previousFrom = fxFrom.value;
+  fxFrom.value = fxTo.value;
+  fxTo.value = previousFrom;
+  loadFxRate();
+};
+document.querySelector('#fxRefresh').onclick = () => loadFxRate(true);
+loadFxRate();
+
 const lingoGroups = [
   {
     title:'Friendly conversation starters',
@@ -395,13 +580,13 @@ document.querySelector('#resetPacking').onclick = () => { if(confirm('Reset the 
 
 const sources = [
  ['Qantas e-ticket (uploaded)','8 Jan and 31 Jan / 1 Feb international flights.'],['Airlink e-ticket (uploaded)','18, 20 and 24 Jan regional flights.'],['Airbnb confirmation (uploaded)','24–26 Jan Franschhoek booking.'],['Booking.com Mountain Marina confirmation (uploaded)','26–29 Jan Cape Town booking.'],['Booking.com Shearwater confirmation (uploaded)','18–20 Jan Victoria Falls booking.'],['User-supplied','Dainfern, Kiara Lodge and Elephant Plains stay details; group size; transfer intentions.'],
- ['Kiara Lodge','https://www.kiaralodgeresort.co.za/'],['Elephant Plains','https://elephantplains.co.za/'],['Casterbridge Lifestyle Centre','https://www.casterbridgehollow.co.za/'],['Franschhoek Wine Tram','https://winetram.co.za/'],['Cape Town Tourism','https://www.capetown.travel/'],['Dictionary of South African English','https://dsae.co.za/'],['Stellenbosch University International Welcome Booklet 2026','https://files.su.ac.za/public/su-international/documents/2026-01/su-international-welcome-booklet-2026.pdf#page=36'],['Oxford Learner’s Dictionaries · sharp-sharp','https://www.oxfordlearnersdictionaries.com/us/definition/english/sharp-sharp'],['Smartraveller · South Africa','https://www.smartraveller.gov.au/destinations/africa/south-africa'],['Smartraveller · Zimbabwe','https://www.smartraveller.gov.au/destinations/africa/zimbabwe'],['CDC · South Africa','https://wwwnc.cdc.gov/travel/destinations/traveler/none/south-africa'],['CDC · Zimbabwe','https://wwwnc.cdc.gov/travel/destinations/traveler/none/zimbabwe/'],['CDC · Choosing malaria medication','https://www.cdc.gov/malaria/hcp/drug-malaria/index.html']
+ ['Kiara Lodge','https://www.kiaralodgeresort.co.za/'],['Elephant Plains','https://elephantplains.co.za/'],['Casterbridge Lifestyle Centre','https://www.casterbridgehollow.co.za/'],['Franschhoek Wine Tram','https://winetram.co.za/'],['Cape Town Tourism','https://www.capetown.travel/'],['South African Tourism · iconic foods','https://www.southafrica.net/gl/en/travel/article/iconic-south-african-foods-taste-all-the-flavours-of-the-rainbow-nation'],['South African Tourism · food & drink','https://www.southafrica.net/uk/en/travel/category/meet-your-south-africa/food-drink'],['Frankfurter exchange-rate API','https://frankfurter.dev/'],['Dictionary of South African English','https://dsae.co.za/'],['Stellenbosch University International Welcome Booklet 2026','https://files.su.ac.za/public/su-international/documents/2026-01/su-international-welcome-booklet-2026.pdf#page=36'],['Oxford Learner’s Dictionaries · sharp-sharp','https://www.oxfordlearnersdictionaries.com/us/definition/english/sharp-sharp'],['Smartraveller · South Africa','https://www.smartraveller.gov.au/destinations/africa/south-africa'],['Smartraveller · Zimbabwe','https://www.smartraveller.gov.au/destinations/africa/zimbabwe'],['CDC · South Africa','https://wwwnc.cdc.gov/travel/destinations/traveler/none/south-africa'],['CDC · Zimbabwe','https://wwwnc.cdc.gov/travel/destinations/traveler/none/zimbabwe/'],['CDC · Choosing malaria medication','https://www.cdc.gov/malaria/hcp/drug-malaria/index.html']
 ];
 const dialog = document.querySelector('#detailDialog');
 const content = document.querySelector('#dialogContent');
 document.querySelector('.dialog__close').onclick = () => dialog.close();
 document.querySelector('#sourcesButton').onclick = () => {
-  content.innerHTML = `<div class="dialog__inner"><div class="eyebrow eyebrow--dark">SOURCES & ASSUMPTIONS</div><h2>What this planner is based on</h2><p>Confirmed reservations come from the uploaded booking documents or details you supplied. Activity, food, language, map and health/safety information uses public information checked on 26 Sep 2026.</p><ul class="source-list">${sources.map(s => `<li>${String(s[1]).startsWith('http') ? `<a href="${s[1]}" target="_blank" rel="noopener">${s[0]} ↗</a>` : `<strong>${s[0]}</strong> — ${s[1]}`}</li>`).join('')}</ul><h3>Assumptions</h3><ul><li>The remaining eight travellers join at Victoria Falls on 18 Jan.</li><li>The group is treated as 10 through the 29 Jan Cape Town → Johannesburg leg.</li><li>The exact 29 Jan domestic flight remains TBC.</li><li>Wine Tram routes/times, activity operating conditions and health/travel advice must be reconfirmed closer to January 2027.</li></ul></div>`;
+  content.innerHTML = `<div class="dialog__inner"><div class="eyebrow eyebrow--dark">SOURCES & ASSUMPTIONS</div><h2>What this planner is based on</h2><p>Confirmed reservations come from the uploaded booking documents or details you supplied. Activity, food, language, map and health/safety information uses public information checked on 26 Sep 2026; the tasting list and FX implementation were checked on 4 Oct 2026.</p><ul class="source-list">${sources.map(s => `<li>${String(s[1]).startsWith('http') ? `<a href="${s[1]}" target="_blank" rel="noopener">${s[0]} ↗</a>` : `<strong>${s[0]}</strong> — ${s[1]}`}</li>`).join('')}</ul><h3>Assumptions</h3><ul><li>The remaining eight travellers join at Victoria Falls on 18 Jan.</li><li>The group is treated as 10 through the 29 Jan Cape Town → Johannesburg leg.</li><li>The exact 29 Jan domestic flight remains TBC.</li><li>Wine Tram routes/times, activity operating conditions and health/travel advice must be reconfirmed closer to January 2027.</li></ul></div>`;
   dialog.showModal();
 };
 

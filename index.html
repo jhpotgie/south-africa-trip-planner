@@ -38,8 +38,10 @@
       <button class="tab" data-section="bookings">Bookings</button>
       <button class="tab" data-section="explore">Explore</button>
       <button class="tab" data-section="eat">Eat</button>
+      <button class="tab" data-section="try">Try List</button>
       <button class="tab" data-section="lingo">Local Lingo</button>
       <button class="tab" data-section="map">Map</button>
+      <button class="tab" data-section="fx">FX</button>
       <button class="tab" data-section="health">Health &amp; Safety</button>
       <button class="tab" data-section="pack">Pack</button>
     </div>
@@ -74,7 +76,7 @@
         <div class="journey" id="journeyStrip"></div>
         <div class="grid grid--2 top-gap">
           <article class="panel"><div class="panel__icon">👥</div><h3>Who is travelling?</h3><p><strong>8–18 Jan:</strong> Jan + partner. <strong>From Victoria Falls:</strong> the group becomes 10. The Qantas long-haul booking in this planner applies to Jan + partner.</p></article>
-          <article class="panel"><div class="panel__icon">🎨</div><h3>How to use this planner</h3><p>Keep the logistics firm and the rest flexible. On the Stays, Explore and Eat pages, tap through ideas and use the checklists and food-tag filters to shape the trip as you go.</p></article>
+          <article class="panel"><div class="panel__icon">🎨</div><h3>How to use this planner</h3><p>Keep the logistics firm and the rest flexible. Tap through Stays, Explore and Eat, tick off the Try List as you go, and use FX for quick price checks.</p></article>
         </div>
         <div class="section-heading compact top-gap"><div><div class="eyebrow eyebrow--dark">NEXT ACTIONS</div><h2>Before you go</h2></div></div>
         <div class="tasks" id="priorityTasks"></div>
@@ -144,6 +146,38 @@
       </div>
     </section>
 
+    <section class="page" id="try">
+      <div class="wrap">
+        <div class="section-heading">
+          <div><div class="eyebrow eyebrow--dark">THE TASTING LIST</div><h2>Things to try in South Africa</h2></div>
+          <button class="text-btn" id="resetTryList">Reset list</button>
+        </div>
+        <p class="lead">A trip-long hit list of South African snacks, street food, comfort dishes, sweets and drinks. Tick things off whenever the group finds them.</p>
+        <div class="fun-strip">
+          <div class="fun-card"><span class="fun-card__icon">🥩</span><div><strong>Biltong</strong><small>the road-trip staple</small></div></div>
+          <div class="fun-card"><span class="fun-card__icon">🍛</span><div><strong>Bunny chow</strong><small>curry in a loaf</small></div></div>
+          <div class="fun-card"><span class="fun-card__icon">🍮</span><div><strong>Malva pudding</strong><small>warm + custardy</small></div></div>
+          <div class="fun-card"><span class="fun-card__icon">🥃</span><div><strong>Springbokkie</strong><small>green-and-gold shot</small></div></div>
+        </div>
+        <div class="art-banner"><img class="art-banner__img" src="try-banner.webp" alt="Colourful illustrated South African tasting table with local food, sweets and drinks beneath Table Mountain" /></div>
+        <div class="try-progress" aria-label="Things tried progress">
+          <div class="try-progress__top"><strong id="tryProgressLabel">0 of 21 tried</strong><span id="tryProgressPercent">0%</span></div>
+          <div class="try-progress__track" id="tryProgressTrack" role="progressbar" aria-valuemin="0" aria-valuemax="21" aria-valuenow="0" aria-labelledby="tryProgressLabel"><div id="tryProgressBar"></div></div>
+        </div>
+        <div class="notice notice--health try-note">
+          <strong>Local does not have to mean alcoholic</strong>
+          <p>Rooibos belongs on the list too. For the boozy options, split tastings, eat first and use a designated driver or arranged transport. A Jägerbomb is included because it was requested as a fun night-out option, but it is international rather than uniquely South African.</p>
+        </div>
+        <div class="try-groups" id="tryGroups"></div>
+        <div class="source-box top-gap">
+          <strong>What made the list?</strong>
+          <p>Core foods and drinks were checked against South African Tourism. The emphasis is on variety and recognisable local favourites, not a claim that every item began in South Africa.</p>
+          <a href="https://www.southafrica.net/gl/en/travel/article/iconic-south-african-foods-taste-all-the-flavours-of-the-rainbow-nation" target="_blank" rel="noopener">South African Tourism · iconic foods ↗</a>
+          <a href="https://www.southafrica.net/uk/en/travel/category/meet-your-south-africa/food-drink" target="_blank" rel="noopener">South African Tourism · food &amp; drink ↗</a>
+        </div>
+      </div>
+    </section>
+
     <section class="page" id="lingo">
       <div class="wrap">
         <div class="section-heading"><div><div class="eyebrow eyebrow--dark">SPEAK LIKE A LOCAL</div><h2>Useful South African lingo</h2></div></div>
@@ -191,6 +225,52 @@
       </div>
     </section>
 
+    <section class="page" id="fx">
+      <div class="wrap wrap--narrow">
+        <div class="section-heading"><div><div class="eyebrow eyebrow--dark">MONEY HELPER</div><h2>FX exchange calculator</h2></div><span class="pill pill--good">Reference rate</span></div>
+        <p class="lead">Quickly translate prices while you travel. It starts with South African rand to US dollars, with Australian dollars, euros and British pounds available too.</p>
+        <article class="fx-card">
+          <div class="fx-field">
+            <label for="fxAmount">Amount</label>
+            <div class="fx-amount-wrap"><span id="fxInputSymbol">R</span><input id="fxAmount" type="number" inputmode="decimal" min="0" step="0.01" value="1000" autocomplete="off" /></div>
+          </div>
+          <div class="fx-pair">
+            <label class="fx-select" for="fxFrom"><span>From</span><select id="fxFrom">
+              <option value="ZAR" selected>ZAR · South African rand</option>
+              <option value="USD">USD · US dollar</option>
+              <option value="AUD">AUD · Australian dollar</option>
+              <option value="EUR">EUR · Euro</option>
+              <option value="GBP">GBP · British pound</option>
+            </select></label>
+            <button class="fx-swap" id="fxSwap" type="button" aria-label="Swap the from and to currencies">⇄ <span>Swap</span></button>
+            <label class="fx-select" for="fxTo"><span>To</span><select id="fxTo">
+              <option value="ZAR">ZAR · South African rand</option>
+              <option value="USD" selected>USD · US dollar</option>
+              <option value="AUD">AUD · Australian dollar</option>
+              <option value="EUR">EUR · Euro</option>
+              <option value="GBP">GBP · British pound</option>
+            </select></label>
+          </div>
+          <div class="fx-quick" id="fxQuickAmounts" aria-label="Quick amounts"></div>
+          <div class="fx-result" aria-live="polite">
+            <small id="fxResultLabel">1,000 ZAR converts to</small>
+            <output id="fxResult" for="fxAmount">Loading rate…</output>
+            <strong id="fxRateLine"></strong>
+          </div>
+          <div class="fx-status-row"><span id="fxStatus" role="status">Fetching the latest reference rate…</span><button class="text-btn" id="fxRefresh" type="button">Refresh rate</button></div>
+        </article>
+        <div class="notice notice--amber">
+          <strong>Use this as a guide, not a bank quote</strong>
+          <p>Reference rates update on working days. Your card, ATM or cash exchange rate can include a spread, foreign transaction fee or withdrawal fee, so the amount charged will differ.</p>
+        </div>
+        <div class="source-box">
+          <strong>Rate source</strong>
+          <p>Latest available reference rates are loaded from Frankfurter, which aggregates central-bank and official-source data. The most recent successful rate is saved on this device for offline use.</p>
+          <a href="https://frankfurter.dev/" target="_blank" rel="noopener">Frankfurter exchange-rate API ↗</a>
+        </div>
+      </div>
+    </section>
+
     <section class="page" id="health">
       <div class="wrap">
         <div class="section-heading"><div><div class="eyebrow eyebrow--dark">HEALTH &amp; SAFETY</div><h2>Practical travel precautions</h2></div></div>
@@ -219,7 +299,7 @@
     </section>
   </main>
 
-  <footer><div class="wrap footer__inner"><div><strong>Southern Africa 2027</strong><span>Research last checked 26 Sep 2026</span></div><button class="text-btn" id="sourcesButton">Sources &amp; assumptions</button></div></footer>
+  <footer><div class="wrap footer__inner"><div><strong>Southern Africa 2027</strong><span>Content updated 4 Oct 2026</span></div><button class="text-btn" id="sourcesButton">Sources &amp; assumptions</button></div></footer>
 
   <dialog id="detailDialog" class="dialog"><button class="dialog__close" aria-label="Close">×</button><div id="dialogContent"></div></dialog>
 
