@@ -662,4 +662,12 @@ function activateSection(id){
 document.querySelectorAll('.tab').forEach(t => t.onclick = () => activateSection(t.dataset.section));
 document.querySelectorAll('[data-jump]').forEach(b => b.onclick = () => activateSection(b.dataset.jump));
 initHorizontalScrollers();
-if('serviceWorker' in navigator && location.protocol.startsWith('http')) navigator.serviceWorker.register('./sw.js').catch(() => {});
+if('serviceWorker' in navigator && location.protocol.startsWith('http')){
+  let refreshingForUpdate = false;
+  navigator.serviceWorker.addEventListener('controllerchange',() => {
+    if(refreshingForUpdate) return;
+    refreshingForUpdate = true;
+    window.location.reload();
+  });
+  navigator.serviceWorker.register('./sw.js',{updateViaCache:'none'}).then(registration => registration.update()).catch(() => {});
+}
