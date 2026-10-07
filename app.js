@@ -10,21 +10,16 @@ const journey = [
  ['9–12 Jan','Golden Gate','Kiara Lodge · 2'],
  ['12–18 Jan','Johannesburg','Dainfern · 2'],
  ['18–20 Jan','Victoria Falls','Shearwater · group becomes 10'],
- ['20–24 Jan','Lowveld + Sabi Sand','Nelspruit stay TBC → Elephant Plains'],
- ['24–31 Jan','Western Cape → JHB','Franschhoek → Cape Town → Dainfern']
+ ['20–24 Jan','Lowveld + Sabi Sand','Nelspruit Lodge → Elephant Plains'],
+ ['24–31 Jan','Western Cape → JHB','Franschhoek → Cape Town → Lanseria / Dainfern']
 ];
 document.querySelector('#journeyStrip').innerHTML = journey.map(x => `
   <article class="journey__stop"><small>${x[0]}</small><h3>${x[1]}</h3><p>${x[2]}</p></article>
 `).join('');
 
 const tasks = [
- ['nelspruit-stay','Book 20–21 Jan Nelspruit / White River accommodation','10 travellers for one night before the transfer to Elephant Plains.'],
- ['cpt-jnb','Book 29 Jan CPT → JNB flight','Group flight details still TBC.'],
- ['ep-hds','Confirm 24 Jan Elephant Plains → Hoedspruit transfer','Lodge transfer; allow extra rainy-season road time.'],
  ['cpt-franschhoek','Arrange 24 Jan CPT Airport → Franschhoek','10 travellers + luggage after the 16:55 arrival.'],
- ['franschhoek-cpt','Arrange 26 Jan Franschhoek → V&A Waterfront','10 travellers + luggage.'],
- ['cpt-airport','Arrange 29 Jan V&A → Cape Town Airport','Match the transfer to the flight once booked.'],
- ['travel-health','Book travel-health check','Discuss malaria prevention, routine vaccines and activity/travel insurance.']
+ ['franschhoek-cpt','Arrange 26 Jan Franschhoek → Mountain Marina','10 travellers + luggage to the V&A Waterfront accommodation.']
 ];
 const taskState = JSON.parse(localStorage.getItem('tripTasksV3') || '{}');
 function renderTasks(){
@@ -54,19 +49,19 @@ const stays = [
  {id:'vicfalls',dates:'18–20 Jan',location:'Victoria Falls · Zimbabwe',stay:"Shearwater's Explorers Village",guests:'10 travellers',arrive:'Airlink 4Z494 lands VFA 13:20 on 18 Jan',depart:'Airlink 4Z477 VFA → KMIA, 14:00 on 20 Jan',activities:[
   ['Walk the Zimbabwe side of Victoria Falls','Expect heavy spray in January; quick-dry clothing and grippy shoes help.','Nature'],['Zambezi sunset cruise','A relaxed group activity after arrival or on the second evening.','Nature'],['White-water rafting','January is commonly high-water season; operation depends on river conditions.','Adventure'],['Flight of Angels','Helicopter view of the Falls and gorge.','Adventure'],['Bridge / gorge activities','Zipline, gorge swing or bungee for the adrenaline group.','Adventure'],['Dusty Road township dining experience','Open-fire Zimbabwean food and a strong sense of place.','Food']
  ]},
- {id:'casterbridge',dates:'20–21 Jan',location:'White River / Nelspruit',stay:'Accommodation to be booked',guests:'10 travellers',arrive:'Airlink 4Z477 lands KMIA 15:40 on 20 Jan',depart:'Lodge-arranged road transfer to Elephant Plains on 21 Jan',activities:[
-  ['Casterbridge Lifestyle Centre','Browse the shops and grounds if there is time after arrival.','Relaxation'],['Local Lowveld dinner','Try Dave’s Kitchen if timing works; Magnolia is the convenient hotel-area fallback.','Food'],['Early night before Sabi Sand','The next day needs an early enough departure to reach Elephant Plains for lunch / afternoon drive.','Relaxation']
+ {id:'casterbridge',dates:'20–21 Jan',location:'Nelspruit',stay:'Nelspruit Lodge',guests:'2 adults on this booking',arrive:'Airlink 4Z477 lands KMIA 15:40; lodge check-in from 14:00',depart:'Confirmed road transfer to Elephant Plains on 21 Jan',activities:[
+  ['Settle in at Nelspruit Lodge','The confirmed Deluxe Double Room can be checked into until 23:30.','Relaxation'],['Easy Lowveld dinner','Keep the evening flexible after the flight and airport transfer.','Food'],['Early night before Sabi Sand','Allow enough time for the confirmed transfer to reach Elephant Plains for lunch / the afternoon drive.','Relaxation']
  ]},
- {id:'elephant',dates:'21–24 Jan',location:'Sabi Sand Game Reserve',stay:'Elephant Plains Game Lodge',guests:'10 travellers',arrive:'Road transfer via Gowrie Gate; target lodge arrival 12:00–14:00',depart:'Transfer to Hoedspruit Airport for 14:10 flight on 24 Jan',activities:[
+ {id:'elephant',dates:'21–24 Jan',location:'Sabi Sand Game Reserve',stay:'Elephant Plains Game Lodge',guests:'10 travellers',arrive:'Confirmed road transfer from Nelspruit via Gowrie Gate',depart:'Confirmed transfer to Hoedspruit Airport for the 14:10 flight on 24 Jan',activities:[
   ['Morning game drives','Included lodge safari rhythm; sightings are never guaranteed.','Wildlife'],['Afternoon / evening game drives','Sundowners and the changing light are part of the experience.','Wildlife'],['Guided bush walk','Tracks, plants, birds and smaller wildlife with a guide.','Wildlife'],['Boma dinner','Weather-dependent lodge dining experience.','Food'],['Pool / downtime','Build in genuine rest between drives.','Relaxation'],['Wildlife photography / stargazing','Low-light evenings and open skies.','Nature']
  ]},
- {id:'franschhoek',dates:'24–26 Jan',location:'Franschhoek',stay:'The Manor House @ Roubaix Estate',guests:'10 travellers',arrive:'Airlink 4Z656 lands Cape Town 16:55; road transfer to Franschhoek',depart:'Transfer to Cape Town after checkout on 26 Jan',activities:[
+ {id:'franschhoek',dates:'24–26 Jan',location:'Franschhoek',stay:'The Manor House @ Roubaix Estate',guests:'10 travellers',arrive:'Airlink 4Z656 lands Cape Town 16:55; transfer to Franschhoek still to book',depart:'Transfer to Mountain Marina still to book for 26 Jan',activities:[
   ['Franschhoek Wine Tram','Recommended as the main full-day experience; route/times should be rechecked closer to Jan 2027.','Food'],['La Bri wine + biltong pairing','Distinctly South African tasting option.','Food'],['Mont Rochelle hike','Outdoor counterpoint to the wine estates.','Nature'],['Village walk','Shops, galleries and cafés around Franschhoek.','Culture'],['Long estate lunch','Choose one meal to linger over rather than racing between tastings.','Food'],['Huguenot Monument & museum','Quick cultural stop if the group wants context.','Culture']
  ]},
- {id:'capetown',dates:'26–29 Jan',location:'Cape Town · V&A Waterfront',stay:'Mountain Marina Luxury Apartments',guests:'10 travellers',arrive:'Transfer from Franschhoek on 26 Jan',depart:'Fly Cape Town → Johannesburg on 29 Jan · flight TBC',activities:[
+ {id:'capetown',dates:'26–29 Jan',location:'Cape Town · V&A Waterfront',stay:'Mountain Marina Luxury Apartments',guests:'10 travellers',arrive:'Transfer from Franschhoek still to book for 26 Jan',depart:'FlySafair FA302 departs Cape Town 10:05 on 29 Jan',activities:[
   ['Table Mountain hike or cableway','For a hike, go as a group in daylight and check weather conditions.','Nature'],['Cape Peninsula day','Chapman’s Peak, Cape Point and the coast.','Nature'],['Boulders Beach penguins','Easy to combine with the Peninsula route.','Wildlife'],['Kirstenbosch Botanical Garden','A strong outdoor / flora option without a full hike.','Nature'],['Bo-Kaap food + heritage','Pair the neighbourhood with Cape Malay food rather than just photos.','Culture'],['Lion’s Head','Popular active option; choose daylight / guided conditions.','Adventure'],['Atlantic Seaboard sunset','Simple, scenic and flexible.','Relaxation'],['Cape Flats food mission','Gatsby / roadhouse / koesister stops for a less touristy food experience.','Food']
  ]},
- {id:'jhb3',dates:'29–31 Jan',location:'Johannesburg · Dainfern',stay:'Jan’s parents',guests:'10 travellers',arrive:'Domestic flight Cape Town → Johannesburg on 29 Jan · flight TBC',depart:'Jan + partner depart OR Tambo on QF66 at 21:35 on 31 Jan',activities:[
+ {id:'jhb3',dates:'29–31 Jan',location:'Johannesburg · Dainfern',stay:'Jan’s parents',guests:'10 travellers',arrive:'FlySafair FA302 lands Lanseria at 12:20 on 29 Jan',depart:'Jan + partner depart OR Tambo on QF66 at 21:35 on 31 Jan',activities:[
   ['Group braai','An easy final shared South African meal.','Food'],['Soweto + Chaf Pozi','Guided Soweto experience followed by shisa nyama / pap / chakalaka.','Food'],['Cradle / local activity catch-up','Use this as a backup if the earlier Johannesburg days stayed quiet.','Culture'],['Final shopping / downtime','Keep space before the long-haul departure.','Relaxation']
  ]}
 ];
@@ -112,12 +107,16 @@ const bookings = [
  ['✈️','Airlink · Johannesburg → Victoria Falls','18 Jan · 4Z494 · 11:35 → 13:20','confirmed',['Jan’s regional ticket']],
  ['🛏️',"Shearwater's Explorers Village",'18–20 Jan · Victoria Falls','confirmed',['5 rooms','10 adults','Breakfast']],
  ['✈️','Airlink · Victoria Falls → KMIA','20 Jan · 4Z477 · 14:00 → 15:40','confirmed',['Regional flight']],
- ['🛏️','Nelspruit / White River accommodation','20–21 Jan · Accommodation to be booked','todo',['10 travellers','Not yet booked']],
- ['🐘','Elephant Plains Game Lodge','21–24 Jan · Sabi Sand','owner',['10 travellers','Lodge transfer being arranged']],
+ ['🛏️','Nelspruit Lodge','20–21 Jan · 3 Webb Street, Nelspruit','confirmed',['1 Deluxe Double Room','2 adults']],
+ ['🚐','Nelspruit Lodge → Elephant Plains','21 Jan · road transfer to the game lodge','confirmed',['Transfer confirmed']],
+ ['🐘','Elephant Plains Game Lodge','21–24 Jan · Sabi Sand','owner',['10 travellers','Transfers confirmed']],
+ ['🚐','Elephant Plains → Hoedspruit Airport','24 Jan · transfer for the 14:10 flight','confirmed',['Transfer confirmed']],
  ['✈️','Airlink · Hoedspruit → Cape Town','24 Jan · 4Z656 · 14:10 → 16:55','confirmed',['Regional flight']],
+ ['🚐','Cape Town Airport → Franschhoek','24 Jan · after the 16:55 arrival','todo',['10 travellers + luggage']],
  ['🏡','The Manor House @ Roubaix Estate','24–26 Jan · Franschhoek','confirmed',['10 adults']],
+ ['🚐','Franschhoek → Mountain Marina','26 Jan · V&A Waterfront accommodation','todo',['10 travellers + luggage']],
  ['🏙️','Mountain Marina Luxury Apartments','26–29 Jan · V&A Waterfront','confirmed',['2 apartments','10 adults']],
- ['✈️','Cape Town → Johannesburg','29 Jan · flight details TBC','todo',['10 travellers']],
+ ['✈️','FlySafair · Cape Town → Lanseria','29 Jan · FA302 · 10:05 → 12:20','confirmed',['2 travellers','Checked bags']],
  ['✈️','Qantas · Johannesburg → Brisbane','31 Jan QF66 JNB 21:35 → PER 1 Feb 13:15 · QF946 PER 15:25 → BNE 22:00','confirmed',['2 travellers']]
 ];
 const pillLabel = {confirmed:'Confirmed', owner:'Confirmed by you', todo:'To book / confirm'};
@@ -538,11 +537,12 @@ const mapPlaces = [
  ['Dainfern','Johannesburg family base',GOOGLE('Dainfern Johannesburg')],
  ['Kiara Lodge','Golden Gate',DIR('Kiara Lodge Golden Gate South Africa')],
  ['Victoria Falls','Shearwater / Falls',DIR("Shearwater's Explorers Village Victoria Falls")],
- ['Nelspruit / White River','Accommodation to be booked',GOOGLE('accommodation Nelspruit White River South Africa')],
+ ['Nelspruit Lodge','3 Webb Street, Nelspruit',DIR('Nelspruit Lodge 3 Webb Street Nelspruit South Africa')],
  ['Elephant Plains','Sabi Sand',DIR('Gowrie Gate Sabi Sand')],
  ['Hoedspruit Airport','Flight to Cape Town',DIR('Hoedspruit Airport')],
  ['Franschhoek','Roubaix Estate / Wine Tram',DIR('44 Cabriere Street Franschhoek')],
  ['Mountain Marina','V&A Waterfront',DIR('7 West Quay Road Cape Town')],
+ ['Lanseria Airport','FlySafair arrival',DIR('Lanseria International Airport')],
  ['OR Tambo','Johannesburg airport',DIR('O. R. Tambo International Airport')]
 ];
 document.querySelector('#mapLinks').innerHTML = mapPlaces.map(m => `<a class="map-link" target="_blank" rel="noopener" href="${m[2]}">${m[0]}<span>${m[1]} · open in Google Maps ↗</span></a>`).join('');
@@ -610,14 +610,14 @@ renderPacking();
 document.querySelector('#resetPacking').onclick = () => { if(confirm('Reset the packing checklist?')) { packed = {}; localStorage.removeItem('tripPackingV3'); renderPacking(); } };
 
 const sources = [
- ['Qantas e-ticket (uploaded)','8 Jan and 31 Jan / 1 Feb international flights.'],['Airlink e-ticket (uploaded)','18, 20 and 24 Jan regional flights.'],['Airbnb confirmation (uploaded)','24–26 Jan Franschhoek booking.'],['Booking.com Mountain Marina confirmation (uploaded)','26–29 Jan Cape Town booking.'],['Booking.com Shearwater confirmation (uploaded)','18–20 Jan Victoria Falls booking.'],['User-supplied','Dainfern, Kiara Lodge and Elephant Plains stay details; group size; transfer intentions.'],
+ ['Qantas e-ticket (uploaded)','8 Jan and 31 Jan / 1 Feb international flights.'],['Airlink e-ticket (uploaded)','18, 20 and 24 Jan regional flights.'],['FlySafair confirmation (uploaded)','29 Jan Cape Town → Lanseria flight for 2 adults.'],['Airbnb confirmation (uploaded)','24–26 Jan Franschhoek booking.'],['Booking.com Mountain Marina confirmation (uploaded)','26–29 Jan Cape Town booking.'],['Booking.com Shearwater confirmation (uploaded)','18–20 Jan Victoria Falls booking.'],['Booking.com Nelspruit Lodge confirmation (uploaded)','20–21 Jan Deluxe Double Room for 2 adults.'],['User-supplied','Dainfern, Kiara Lodge and Elephant Plains stay details; group size; confirmed game-lodge transfers.'],
  ['Kiara Lodge','https://www.kiaralodgeresort.co.za/'],['Elephant Plains','https://elephantplains.co.za/'],['Casterbridge Lifestyle Centre','https://www.casterbridgehollow.co.za/'],['Franschhoek Wine Tram','https://winetram.co.za/'],['Cape Town Tourism','https://www.capetown.travel/'],['Marine Dynamics · shark cage diving','https://sharkwatchsa.com/shark-cage-diving-cape-town/'],['Bo-Kaap Tours','https://www.bokaaptours.com/tours'],['Atlantic Outlook · hikes and kayaking','https://www.atlanticoutlook.com/'],['Animal Ocean · ocean safari','https://www.animalocean.co.za/ocean-safari-kelp-snorkeling-cape-town'],['Cape Town Tandem Paragliding','https://www.paraglide.co.za/'],['Wanderer · private Cape Peninsula tour','https://wanderer.capetown/cape-town-day-tours/cape-point-tour/'],['Robben Island Museum','https://www.robben-island.org.za/tour-types/'],['South African Tourism · iconic foods','https://www.southafrica.net/gl/en/travel/article/iconic-south-african-foods-taste-all-the-flavours-of-the-rainbow-nation'],['South African Tourism · food & drink','https://www.southafrica.net/uk/en/travel/category/meet-your-south-africa/food-drink'],['Frankfurter exchange-rate API','https://frankfurter.dev/'],['Dictionary of South African English','https://dsae.co.za/'],['Stellenbosch University International Welcome Booklet 2026','https://files.su.ac.za/public/su-international/documents/2026-01/su-international-welcome-booklet-2026.pdf#page=36'],['Oxford Learner’s Dictionaries · sharp-sharp','https://www.oxfordlearnersdictionaries.com/us/definition/english/sharp-sharp'],['Smartraveller · South Africa','https://www.smartraveller.gov.au/destinations/africa/south-africa'],['Smartraveller · Zimbabwe','https://www.smartraveller.gov.au/destinations/africa/zimbabwe'],['CDC · South Africa','https://wwwnc.cdc.gov/travel/destinations/traveler/none/south-africa'],['CDC · Zimbabwe','https://wwwnc.cdc.gov/travel/destinations/traveler/none/zimbabwe/'],['CDC · Choosing malaria medication','https://www.cdc.gov/malaria/hcp/drug-malaria/index.html']
 ];
 const dialog = document.querySelector('#detailDialog');
 const content = document.querySelector('#dialogContent');
 document.querySelector('.dialog__close').onclick = () => dialog.close();
 document.querySelector('#sourcesButton').onclick = () => {
-  content.innerHTML = `<div class="dialog__inner"><div class="eyebrow eyebrow--dark">SOURCES & ASSUMPTIONS</div><h2>What this planner is based on</h2><p>Confirmed reservations come from the uploaded booking documents or details you supplied. Activity, food, language, map and health/safety information uses public information checked on 26 Sep 2026; the tasting list and FX implementation were checked on 4 Oct 2026; Cape Town activity and operator details were checked on 5 Oct 2026.</p><ul class="source-list">${sources.map(s => `<li>${String(s[1]).startsWith('http') ? `<a href="${s[1]}" target="_blank" rel="noopener">${s[0]} ↗</a>` : `<strong>${s[0]}</strong> — ${s[1]}`}</li>`).join('')}</ul><h3>Assumptions</h3><ul><li>The remaining eight travellers join at Victoria Falls on 18 Jan.</li><li>The group is treated as 10 through the 29 Jan Cape Town → Johannesburg leg.</li><li>Cape Town travel times start and end at Mountain Marina in the V&A Waterfront and are estimates, not booking guarantees.</li><li>The exact 29 Jan domestic flight remains TBC.</li><li>Wine Tram routes/times, activity operating conditions and health/travel advice must be reconfirmed closer to January 2027.</li></ul></div>`;
+  content.innerHTML = `<div class="dialog__inner"><div class="eyebrow eyebrow--dark">SOURCES & ASSUMPTIONS</div><h2>What this planner is based on</h2><p>Confirmed reservations come from the uploaded booking documents or details you supplied. Activity, food, language, map and health/safety information uses public information checked on 26 Sep 2026; the tasting list and FX implementation were checked on 4 Oct 2026; Cape Town activity and operator details were checked on 5 Oct 2026; the latest booking status was checked on 7 Oct 2026.</p><ul class="source-list">${sources.map(s => `<li>${String(s[1]).startsWith('http') ? `<a href="${s[1]}" target="_blank" rel="noopener">${s[0]} ↗</a>` : `<strong>${s[0]}</strong> — ${s[1]}`}</li>`).join('')}</ul><h3>Assumptions</h3><ul><li>The remaining eight travellers join at Victoria Falls on 18 Jan.</li><li>The group is treated as 10 through the Cape Town stay; the Nelspruit Lodge and FlySafair confirmations each cover 2 adults.</li><li>Only the Cape Town Airport → Franschhoek and Franschhoek → Mountain Marina transfers remain to arrange.</li><li>Cape Town travel times start and end at Mountain Marina in the V&A Waterfront and are estimates, not booking guarantees.</li><li>Wine Tram routes/times, activity operating conditions and health/travel advice must be reconfirmed closer to January 2027.</li></ul></div>`;
   dialog.showModal();
 };
 

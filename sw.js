@@ -1,4 +1,4 @@
-const CACHE='sa-trip-v5-2';
+const CACHE='sa-trip-v5-3';
 const ASSETS=[
   './','./index.html','./styles.css','./app.js','./hero-safari.webp','./stays-banner.webp','./bookings-banner.webp','./illustrated-route-map-v2.webp','./explore-banner.webp','./eat-banner.webp','./try-banner.webp','./manifest.webmanifest'
 ];
