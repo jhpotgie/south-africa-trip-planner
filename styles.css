@@ -144,3 +144,90 @@ footer{border-top:1px solid var(--line);padding:22px 0 calc(22px + var(--safe-bo
 .activity__links{flex-wrap:wrap}
 .cards--cape-town .activity__links a:first-child{flex:1 1 185px}
 @media(max-width:820px){.cape-planner{grid-template-columns:1fr;align-items:start}.cape-planner__filters{justify-content:flex-start}.cards--cape-town .activity{min-height:0}}
+
+/* Cape Town itinerary: the same paper, sand and green as the explore cards. */
+.activity--itinerary{border-color:#cfb88c;background:linear-gradient(155deg,#fffdf8,#f0e5cf);box-shadow:0 8px 24px rgba(18,58,51,.06)}
+.activity--itinerary .activity__icon{background:linear-gradient(180deg,#f7dfb9,#e8c991);border-color:#d7b77d}
+.activity--itinerary .activity__links{width:100%}
+.activity--itinerary .link-button{width:100%;border-radius:13px;background:var(--ink);color:#fff;padding:12px 14px;text-align:center;transition:background .18s ease}
+.activity--itinerary .link-button:hover{background:var(--teal)}
+.activity--itinerary .link-button:focus-visible{outline:3px solid var(--sun);outline-offset:3px}
+.cape-itinerary{min-width:0;overflow-wrap:anywhere}
+.cape-itinerary>h2{padding-right:24px;line-height:1.08;letter-spacing:-.025em}
+.cape-itinerary__intro p{margin:0;color:var(--muted);font-size:.94rem}
+.cape-itinerary__facts{display:flex;gap:7px;flex-wrap:wrap;margin:16px 0 20px}
+.cape-itinerary__facts>span{border-radius:999px;padding:6px 10px;background:#efe7d7;color:var(--ink2);font-size:.75rem;font-weight:800;white-space:normal}
+.cape-itinerary__days{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px;margin:0 0 24px}
+.cape-itinerary__days a{display:flex;align-items:center;justify-content:center;min-height:44px;padding:9px 7px;border:1px solid var(--line);border-radius:13px;background:#edf2ef;color:var(--teal);font-size:.76rem;font-weight:850;text-align:center;text-decoration:none;line-height:1.35;white-space:normal}
+.cape-itinerary__days a:hover{border-color:var(--teal);background:#e1eee8}
+.cape-itinerary__days a:focus-visible,.cape-itinerary__copy a:focus-visible{outline:3px solid var(--sun);outline-offset:3px}
+.cape-itinerary__day{margin-top:24px;padding-top:24px;border-top:1px solid var(--line);scroll-margin-top:18px}
+.cape-itinerary__heading{display:grid;grid-template-columns:68px minmax(0,1fr);gap:15px;align-items:center;margin-bottom:16px}
+.cape-itinerary__date{display:grid;justify-items:center;align-content:center;gap:1px;min-height:74px;padding:9px 6px;border:1px solid #dcd0b8;border-radius:18px;background:#f0e5cf;color:var(--ink)}
+.cape-itinerary__date span{font-size:.62rem;font-weight:900;text-transform:uppercase;letter-spacing:.08em}
+.cape-itinerary__date strong{font-family:Georgia,"Times New Roman",serif;font-size:1.25rem;font-weight:500;line-height:1.25;text-align:center}
+.cape-itinerary__heading h3{font-family:Georgia,"Times New Roman",serif;font-size:1.55rem;font-weight:500;line-height:1.15;letter-spacing:-.02em;margin:0 0 5px}
+.cape-itinerary__heading p{margin:0;color:var(--muted);font-size:.82rem}
+.cape-itinerary__stops{list-style:none;display:grid;gap:10px;margin:0;padding:0}
+.cape-itinerary__stop{display:grid;grid-template-columns:42px minmax(0,1fr);gap:12px;padding:15px;border:1px solid var(--line);border-radius:18px;background:#fffdf8}
+.cape-itinerary__stop--locked{border-color:#c4dacf;background:#edf4ef}
+.cape-itinerary__icon{display:grid;place-items:center;align-self:start;width:42px;height:42px;border:1px solid #dfd3bb;border-radius:14px;background:#f2e8d6;font-size:1.4rem;line-height:1}
+.cape-itinerary__stop--locked .cape-itinerary__icon{border-color:#c5dbd0;background:#dcece4}
+.cape-itinerary__copy{min-width:0}
+.cape-itinerary__time{display:block;color:var(--teal);font-size:.68rem;font-weight:900;letter-spacing:.06em;text-transform:uppercase}
+.cape-itinerary__copy h4,.cape-itinerary__choice-detail h4{margin:3px 0 5px;font-size:.98rem;line-height:1.3;color:var(--ink)}
+.cape-itinerary__copy p,.cape-itinerary__choice-detail p{margin:0;font-size:.85rem;line-height:1.55;color:var(--ink2)}
+.cape-itinerary__copy p+p,.cape-itinerary__choice-detail p+p{margin-top:7px}
+.cape-itinerary__copy a,.cape-itinerary__choice-detail a,.cape-itinerary__weather a{color:var(--teal);font-weight:800;text-underline-offset:3px}
+.cape-itinerary__badge{display:inline-flex;align-items:center;border-radius:999px;padding:4px 8px;margin-top:9px;background:#dcece4;color:#246351;font-size:.66rem;font-weight:900}
+.cape-itinerary__badge--weather{background:#faead8;color:#8a4e20}
+.cape-itinerary__choices{min-width:0;margin:15px 0 0;padding:15px;border:1px solid #dcd0b8;border-radius:18px;background:#f6f1e7}
+.cape-itinerary__stop>.cape-itinerary__choices{grid-column:1/-1;margin-top:0}
+.cape-itinerary__choices legend{max-width:100%;padding:0 6px;font-weight:850;font-size:.9rem;color:var(--ink)}
+.cape-itinerary__choices>p{margin:0 0 12px;color:var(--muted);font-size:.82rem}
+.cape-itinerary__options{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.cape-itinerary__option{position:relative;display:grid;grid-template-columns:18px minmax(0,1fr);gap:5px 8px;align-content:start;align-items:center;min-width:0;padding:12px 10px;border:1px solid var(--line);border-radius:14px;background:var(--card);cursor:pointer;transition:border-color .18s ease,background .18s ease}
+.cape-itinerary__option input{grid-column:1;grid-row:1;width:17px;height:17px;margin:0;accent-color:var(--teal)}
+.cape-itinerary__option .icon{grid-column:2;grid-row:1;font-size:1.35rem;line-height:1.25}
+.cape-itinerary__option strong{grid-column:1/-1;display:block;font-size:.83rem;line-height:1.3;margin-top:3px}
+.cape-itinerary__option small{grid-column:1/-1;display:block;color:var(--muted);font-size:.71rem;line-height:1.4}
+.cape-itinerary__option:hover{border-color:var(--teal)}
+.cape-itinerary__option:has(input:checked){border-color:var(--teal);background:#e3efeb;box-shadow:inset 0 0 0 1px var(--teal)}
+.cape-itinerary__option:has(input:focus-visible){outline:3px solid var(--sun);outline-offset:3px}
+.cape-itinerary__choice-detail{margin-top:12px;padding:14px;border-left:3px solid var(--teal);border-radius:0 12px 12px 0;background:var(--card)}
+.cape-itinerary [hidden]{display:none!important}
+.cape-itinerary__weather{margin-top:24px;padding:18px;border:1px solid #efd1ad;border-radius:20px;background:#faead8}
+.cape-itinerary__weather h3{font-family:Georgia,"Times New Roman",serif;font-size:1.35rem;font-weight:500;line-height:1.2;margin:0 0 9px}
+.cape-itinerary__weather p,.cape-itinerary__weather li{font-size:.84rem;color:var(--ink2)}
+.cape-itinerary__weather p{margin:0}
+.cape-itinerary__weather p+p{margin-top:9px}
+.cape-itinerary__weather ul{padding-left:19px;margin:9px 0 0}
+.cape-itinerary__weather li+li{margin-top:6px}
+.cape-itinerary__close{width:100%;margin-top:18px}
+.cape-itinerary__close:focus-visible{outline:3px solid var(--sun);outline-offset:3px}
+@media(max-width:520px){
+  .dialog__inner.cape-itinerary{padding:25px 16px 20px}
+  .cape-itinerary>h2{font-size:1.8rem;padding-right:20px}
+  .cape-itinerary__intro p{font-size:.88rem}
+  .cape-itinerary__facts{gap:6px;margin:14px 0 16px}
+  .cape-itinerary__facts>span{font-size:.69rem;padding:5px 8px}
+  .cape-itinerary__days{margin-bottom:20px}
+  .cape-itinerary__day{margin-top:20px;padding-top:20px}
+  .cape-itinerary__heading{grid-template-columns:58px minmax(0,1fr);gap:10px}
+  .cape-itinerary__date{min-height:66px;border-radius:15px}
+  .cape-itinerary__date strong{font-size:1.08rem}
+  .cape-itinerary__heading h3{font-size:1.3rem}
+  .cape-itinerary__heading p{font-size:.77rem}
+  .cape-itinerary__stop{grid-template-columns:34px minmax(0,1fr);gap:9px;padding:12px 10px;border-radius:15px}
+  .cape-itinerary__icon{width:34px;height:36px;border-radius:11px;font-size:1.15rem}
+  .cape-itinerary__copy h4{font-size:.92rem}
+  .cape-itinerary__copy p{font-size:.81rem}
+  .cape-itinerary__choices{padding:12px 10px}
+  .cape-itinerary__options{grid-template-columns:1fr}
+  .cape-itinerary__option{grid-template-columns:18px 28px minmax(0,1fr);gap:3px 8px;padding:12px}
+  .cape-itinerary__option strong{grid-column:3;grid-row:1;margin:0}
+  .cape-itinerary__option small{grid-column:3;grid-row:2}
+  .cape-itinerary__option .icon{grid-row:1/3;align-self:center}
+  .cape-itinerary__choice-detail{padding:12px}
+  .cape-itinerary__weather{padding:15px}
+}

@@ -158,6 +158,7 @@ const explore = {
   ['🍷','Estate tastings','Pick fewer estates and spend longer at each.',['Wine','Relaxed'],'https://franschhoek.org.za/']
  ],
  'Cape Town':[
+  {icon:'🗓️',title:'Cape Town Tentative Itinerary',text:'Three flexible days of mountain views, penguins, coastal drives and Cape Malay food, with a choice of final-morning adventures. Finish with Waterfront shopping and a Bree Street night out.',tags:['26–28 Jan','Tentative','3 days'],special:'cape-itinerary'},
   {icon:'🚠',title:'Table Mountain by cableway',text:'The simplest route to the summit. Check the live operating status and queue before leaving; high wind can stop the cableway.',tags:['Iconic','View','Half day'],url:'https://www.tablemountain.net/',linkLabel:'Official cableway',map:'Table Mountain Aerial Cableway',pace:'half',activityTime:'1½–2½ hr on top',transitTime:'20–30 min each way',totalTime:'3½–5 hr total'},
   {icon:'🥾',title:'Guided Table Mountain hike · India Venster',text:'A challenging, scenic summit route with a qualified mountain guide. Atlantic Outlook supplies safety equipment and descends by cableway when it is operating.',tags:['Hiking','Adventure','Full day'],url:'https://www.atlanticoutlook.com/pages/table-mountain-hike-booking',linkLabel:'Recommended · Atlantic Outlook',map:'Table Mountain Aerial Cableway',pace:'full',activityTime:'5–7 hr round trip',transitTime:'20–30 min each way',totalTime:'6–8 hr total'},
   {icon:'🌅',title:'Guided Lion’s Head hike',text:'A sunrise or sunset climb with a qualified guide, head torches and safety equipment. Some steep sections use chains and ladders.',tags:['Hiking','View','Half day'],url:'https://www.atlanticoutlook.com/pages/lions-head-hike-booking',linkLabel:'Recommended · Atlantic Outlook',map:'Lion’s Head Trail',pace:'half',activityTime:'3–4 hr hike',transitTime:'15–25 min each way',totalTime:'4–5 hr total'},
@@ -188,7 +189,7 @@ function normaliseExploreActivity(activity, destination){
 }
 function renderExplore(dest){
   const allActivities = explore[dest].map(activity => normaliseExploreActivity(activity, dest));
-  const visibleActivities = dest === 'Cape Town' && capePace !== 'all' ? allActivities.filter(activity => activity.pace === capePace) : allActivities;
+  const visibleActivities = dest === 'Cape Town' && capePace !== 'all' ? allActivities.filter(activity => activity.special === 'cape-itinerary' || activity.pace === capePace) : allActivities;
   const capePlanner = dest === 'Cape Town' ? `
     <div class="cape-planner">
       <div><span class="cape-planner__kicker">26–29 JAN · STARTING AT MOUNTAIN MARINA</span><strong>Choose your own Cape Town adventure</strong><p>Door-to-door estimates include typical travel from the V&A Waterfront, check-in and a little buffer. Traffic, queues and Cape weather can stretch them, so reconfirm exact pickup times when booking.</p></div>
@@ -198,9 +199,10 @@ function renderExplore(dest){
     </div>` : '';
   document.querySelector('#exploreList').innerHTML = `
     <section class="destination-block"><h3>${dest}</h3>${capePlanner}<div class="cards ${dest === 'Cape Town' ? 'cards--cape-town' : ''}">${visibleActivities.map(a => `
-      <article class="activity"><div class="activity__icon">${a.icon}</div><h4>${a.title}</h4><p>${a.text}</p><div class="activity__tags">${a.tags.map(t => `<span class="tag">${t}</span>`).join('')}</div>${a.totalTime ? `<div class="activity__timing"><div><small>Activity</small><strong>${a.activityTime}</strong></div><div><small>Transit</small><strong>${a.transitTime}</strong></div><div class="activity__timing-total"><small>Allow</small><strong>${a.totalTime}</strong></div></div>` : ''}<div class="activity__links"><a href="${a.url}" target="_blank" rel="noopener">${a.linkLabel || 'Current details'} ↗</a>${a.special==='wine' ? '<button class="link-button" data-wine-plan>Suggested plan</button>' : `<a href="${GOOGLE(a.map || `${a.title} ${dest}`)}" target="_blank" rel="noopener">Map ↗</a>`}</div></article>
+      <article class="activity${a.special === 'cape-itinerary' ? ' activity--itinerary' : ''}"><div class="activity__icon">${a.icon}</div><h4>${a.title}</h4><p>${a.text}</p><div class="activity__tags">${a.tags.map(t => `<span class="tag">${t}</span>`).join('')}</div>${a.totalTime ? `<div class="activity__timing"><div><small>Activity</small><strong>${a.activityTime}</strong></div><div><small>Transit</small><strong>${a.transitTime}</strong></div><div class="activity__timing-total"><small>Allow</small><strong>${a.totalTime}</strong></div></div>` : ''}<div class="activity__links">${a.special === 'cape-itinerary' ? '<button class="link-button" type="button" data-cape-itinerary aria-haspopup="dialog" aria-controls="detailDialog">View tentative itinerary →</button>' : `<a href="${a.url}" target="_blank" rel="noopener">${a.linkLabel || 'Current details'} ↗</a>${a.special==='wine' ? '<button class="link-button" data-wine-plan>Suggested plan</button>' : `<a href="${GOOGLE(a.map || `${a.title} ${dest}`)}" target="_blank" rel="noopener">Map ↗</a>`}`}</div></article>
     `).join('')}</div></section>`;
   document.querySelectorAll('[data-wine-plan]').forEach(b => b.onclick = showWinePlan);
+  document.querySelectorAll('[data-cape-itinerary]').forEach(button => button.onclick = showCapeItinerary);
   document.querySelectorAll('[data-cape-pace]').forEach(button => button.onclick = () => {
     capePace = button.dataset.capePace;
     renderExplore('Cape Town');
@@ -215,6 +217,70 @@ document.querySelectorAll('[data-dest]').forEach(b => b.onclick = () => {
 function showWinePlan(){
   content.innerHTML = `<div class="dialog__inner"><div class="eyebrow eyebrow--dark">FRANSCHHOEK · OPTIONAL PLAN</div><h2>A relaxed Wine Tram day</h2><p>This is a suggested shape for the day, not a fixed itinerary. The current Blue Line is a practical fit for your Cabriere Street stay, but January 2027 routes and times need reconfirmation before booking.</p><div class="wine-plan"><div class="wine-stop"><div><strong>Morning</strong></div><div><strong>La Bri</strong><p>Start with the wine + biltong pairing — a distinctively South African first stop.</p></div></div><div class="wine-stop"><div><strong>Late morning</strong></div><div><strong>Holden Manz</strong><p>Make this the longer stop and pre-book a proper estate lunch rather than squeezing food between tastings.</p></div></div><div class="wine-stop"><div><strong>Early afternoon</strong></div><div><strong>Rickety Bridge</strong><p>One relaxed tasting and a wander; keep the pace easy after lunch.</p></div></div><div class="wine-stop"><div><strong>Mid-afternoon</strong></div><div><strong>Grande Provence</strong><p>Finish with a final tasting / estate stroll and return to town with time before dinner.</p></div></div></div><h3>Why only four stops?</h3><ul><li>It keeps the group together without racing the timetable.</li><li>There is one proper lunch, not four tasting-room snacks.</li><li>La Bri adds the biltong pairing you wanted from the food side of the trip.</li><li>You still have room to swap an estate once the 2027 Wine Tram timetable is published.</li></ul><p><a href="https://winetram.co.za/" target="_blank" rel="noopener">Check current Wine Tram routes ↗</a></p></div>`;
   dialog.showModal();
+}
+
+const capeMorningOptions = [
+  {id:'lions-head',icon:'🥾',title:'Lion’s Head',summary:'Active · mountain views',text:'Start early and hike in daylight, only in suitable weather. Allow roughly 3 hours for travel and the hike, followed by breakfast or brunch. Use a guide if the group would like local knowledge or support. Keep the descent in daylight.'},
+  {id:'kirstenbosch',icon:'🌿',title:'Kirstenbosch',summary:'Relaxed · gardens & scenery',text:'Explore Kirstenbosch National Botanical Garden, walk the canopy walkway and enjoy the mountain backdrop. This is the least strenuous morning option, with an easy walking pace.'},
+  {id:'robben-island',icon:'⛴️',title:'Robben Island',summary:'History · allow about 4 hours',text:'Take an early ferry from the V&A Waterfront for South African history and Nelson Mandela’s story. Allow approximately 4 hours for the complete experience; confirm January 2027 ferry times closer to the trip. Keep the Bo-Kaap lunch flexible if needed while protecting the final Waterfront afternoon.'}
+];
+let capeMorningChoice = '';
+const capeItineraryDays = [
+  {date:'26 Jan',weekday:'Tuesday',title:'False Bay, mountain & Waterfront',intro:'Franschhoek → Cape Town, with relaxed coastal stops along the way.',stops:[
+    {icon:'🚗',time:'Morning',title:'Leave Franschhoek · Muizenberg + St James',text:'Check out and use your own transport to head toward Cape Town via False Bay. Walk Muizenberg Beach, see the colourful beach huts and make a brief stop at St James. Keep this a relaxed coastal wander.'},
+    {icon:'⚓',time:'Late morning / lunch',title:'Kalk Bay village + seaside lunch',text:'Explore the harbour, browse shops and galleries, then settle into a casual lunch with local character. Leave room to enjoy the seaside atmosphere.'},
+    {icon:'🚠',time:'Afternoon · if clear',title:'Table Mountain by cableway',badge:'Weather dependent',text:'If the mountain is clear and the cableway is operating, drive to the mountain, take the cableway up and enjoy the summit viewpoints. Use the first suitable clear-weather opportunity during the stay. If conditions are poor, continue to Mountain Marina, check in and spend extra time at the Waterfront.'},
+    {icon:'🛏️',time:'Late afternoon / evening',title:'Mountain Marina · unpack + reset',text:'Check in at Mountain Marina Luxury Apartments at the V&A Waterfront. Allow time to unpack and freshen up after the drive.'},
+    {icon:'🍽️',time:'Easy first evening',title:'Waterfront wander + Time Out Market',text:'Take a relaxed walk around the V&A Waterfront, then use Time Out Market Cape Town for a group dinner with plenty of food choices.'}
+  ]},
+  {date:'27 Jan',weekday:'Wednesday',title:'Penguins, coastal roads & sunset',intro:'The main scenic driving day, followed by an easy evening on the water.',stops:[
+    {icon:'🐧',time:'Leave around 07:30 · penguins 08:30–09:45',title:'Boulders Beach Penguin Colony',text:'Drive from the Waterfront to see the African penguins and walk the boardwalks. Allow time to enjoy the colony rather than making it a quick photo stop.'},
+    {icon:'☕',time:'Around 09:50–10:45',title:'A short stop in Simon’s Town',text:'Walk the harbour and town, browse the main area and stop for coffee or a snack. Keep this visit short enough to enjoy the coastal drive.'},
+    {icon:'🚗',time:'Late morning / early afternoon',title:'The scenic coastal loop',text:'Follow <strong>Red Hill → Scarborough → Misty Cliffs → Kommetjie → Noordhoek</strong>. Add a short Noordhoek / Long Beach stop if the group feels like it and timing is comfortable.'},
+    {icon:'🌊',time:'Before lunch',title:'Chapman’s Peak Drive',text:'Enjoy the mountain and ocean scenery, stopping at viewpoints where safe and permitted. Leave time for photos and the drive itself.'},
+    {icon:'🐟',time:'Around 13:30–15:00',title:'Hout Bay harbour + fish and chips',text:'Explore the harbour, have fish and chips for lunch and look for seals nearby. A dedicated seal-island boat trip is optional only if the group decides to make it a priority.'},
+    {icon:'🏖️',time:'Around 15:45–17:00',title:'Camps Bay beach + promenade',text:'Walk beside the beach and relax with a drink overlooking the ocean. Return to Mountain Marina for a quick freshen-up before the evening.'},
+    {icon:'🥙',time:'Around 17:45–18:45',title:'Oranjezicht City Farm Market',text:'Use the market for an early dinner or grazing stop <strong>before the cruise</strong>. Reconfirm the January opening hours and leave enough time to reach the boat without rushing.'},
+    {icon:'⛵',time:'Check-in around 19:00 · confirm with operator',title:'Waterfront sunset cruise',text:'Make the cruise the main evening experience. Confirm the January departure and check-in times with the selected operator, and adjust the market visit to fit. Wind can change the plan. Afterward, add a casual Waterfront drink only if everyone has energy.'}
+  ]},
+  {date:'28 Jan',weekday:'Thursday',title:'Your choice, Cape Malay food & a final night out',intro:'Choose one morning experience; keep the final Waterfront afternoon and Bree Street evening in place.',stops:[
+    {icon:'🧭',time:'Morning · choose ONE',title:'Pick the morning that suits the group',choices:true},
+    {icon:'🏘️',time:'Lunch / early afternoon · aim for 12:30–14:30',title:'Bo-Kaap heritage + Cape Malay lunch',text:'Explore the neighbourhood’s architecture, history and food. Try <strong>Bo-Kaap Kombuis</strong> for bobotie, denningvleis, bredie, Cape Malay tasting dishes and malva pudding, or <strong>Biesmiellah</strong> for tomato bredie, bobotie, breyani and denningvleis. Lunch can shift later after Robben Island; keep the final Waterfront afternoon unhurried.'},
+    {icon:'🛍️',time:'Final afternoon · approximately 14:30–17:30',title:'V&A Waterfront · final exploring + shopping',badge:'Locked · final afternoon',locked:true,text:'Keep this on the final afternoon: browse the Waterfront, shop for gifts and souvenirs, and take a coffee or drinks break. Leave space to wander at an unhurried pace.'},
+    {icon:'🛏️',time:'Around 17:30–19:00',title:'Mountain Marina · reset for the night',text:'Return to the apartments to shower, change and rest briefly before the final night out.'},
+    {icon:'🍸',time:'Final night · from around 19:30',title:'Bree Street · dinner + drinks',badge:'Locked · final night',locked:true,text:'Use <strong>Uber / rideshare rather than driving</strong>. Make this the final proper night out in Cape Town, with dinner and one or more bars or cocktail venues to suit the group’s energy. Keep the stops flexible.'}
+  ]}
+];
+
+function renderCapeMorningChoices(){
+  return `<fieldset class="cape-itinerary__choices"><legend>Choose one morning adventure</legend><p>Pick for the group’s interests, energy and weather. These are alternatives for the same morning.</p><div class="cape-itinerary__options">${capeMorningOptions.map(option => `
+    <label class="cape-itinerary__option"><input type="radio" name="cape-morning" value="${option.id}" data-cape-morning aria-controls="cape-morning-${option.id}" ${capeMorningChoice === option.id ? 'checked' : ''}><span class="icon" aria-hidden="true">${option.icon}</span><strong>${option.title}</strong><small>${option.summary}</small></label>
+  `).join('')}</div>${capeMorningOptions.map(option => `<div class="cape-itinerary__choice-detail" id="cape-morning-${option.id}" ${capeMorningChoice === option.id ? '' : 'hidden'}><h4>${option.title}</h4><p>${option.text}</p></div>`).join('')}<p>If Table Mountain was missed earlier, it can replace this morning’s choice at the first clear-weather opportunity. Prioritise it over Lion’s Head for a first visit.</p></fieldset>`;
+}
+
+function showCapeItinerary(){
+  content.innerHTML = `<div class="dialog__inner cape-itinerary">
+    <div class="eyebrow eyebrow--dark">CAPE TOWN · 26–28 JANUARY 2027</div><h2 id="capeItineraryTitle">Cape Town Tentative Itinerary</h2>
+    <div class="cape-itinerary__intro"><p>A flexible shape for three days, based on your itinerary. Times are planning guides; adjust for weather, traffic, energy and opening hours.</p></div>
+    <div class="cape-itinerary__facts"><span class="tag tag--relax">Tentative / flexible</span><span class="tag">📍 Mountain Marina · V&A Waterfront</span><span class="tag">🚗 Own transport by day</span><span class="tag">🚕 Rideshare for nights out</span></div>
+    <nav class="cape-itinerary__days" aria-label="Jump to itinerary day">${capeItineraryDays.map((day,index) => `<a class="filter-chip" href="#cape-itinerary-day-${index}">${day.weekday} · ${day.date}</a>`).join('')}</nav>
+    ${capeItineraryDays.map((day,index) => `<section class="cape-itinerary__day" id="cape-itinerary-day-${index}" aria-labelledby="cape-itinerary-heading-${index}">
+      <header class="cape-itinerary__heading"><div class="cape-itinerary__date"><span>${day.weekday.slice(0,3)}</span><strong>${day.date}</strong></div><div><h3 id="cape-itinerary-heading-${index}">${day.title}</h3><p>${day.intro}</p></div></header>
+      <ol class="cape-itinerary__stops">${day.stops.map(stop => `<li class="cape-itinerary__stop${stop.locked ? ' cape-itinerary__stop--locked' : ''}"><span class="cape-itinerary__icon" aria-hidden="true">${stop.icon}</span><div class="cape-itinerary__copy"><small class="cape-itinerary__time">${stop.time}</small><h4>${stop.title}</h4>${stop.badge ? `<span class="cape-itinerary__badge${stop.locked ? '' : ' cape-itinerary__badge--weather'}">${stop.badge}</span>` : ''}${stop.choices ? '' : `<p>${stop.text}</p>`}</div>${stop.choices ? renderCapeMorningChoices() : ''}</li>`).join('')}</ol>
+    </section>`).join('')}
+    <aside class="cape-itinerary__weather"><h3>🌤️ Leave room for the weather</h3><p><strong>Table Mountain:</strong> try 26 January if clear, otherwise take the next suitable clear-weather window, including replacing the 28 January morning choice. Keep the final Waterfront afternoon and Bree Street night in place.</p><p><strong>Lion’s Head:</strong> suitable weather and daylight hiking only, with no sunset descent. <strong>Sunset cruise:</strong> confirm the operator’s exact January timing and keep the market visit before it.</p></aside>
+    <button class="btn btn--dark cape-itinerary__close" type="button" data-close-cape-itinerary>Close itinerary</button>
+  </div>`;
+  content.querySelector('[data-close-cape-itinerary]').onclick = () => dialog.close();
+  content.querySelectorAll('[data-cape-morning]').forEach(input => input.onchange = () => {
+    capeMorningChoice = input.value;
+    capeMorningOptions.forEach(option => {
+      content.querySelector(`#cape-morning-${option.id}`).hidden = option.id !== capeMorningChoice;
+    });
+  });
+  dialog.setAttribute('aria-labelledby','capeItineraryTitle');
+  dialog.showModal();
+  dialog.scrollTop = 0;
 }
 
 const foods = {
@@ -617,6 +683,7 @@ const sources = [
 const dialog = document.querySelector('#detailDialog');
 const content = document.querySelector('#dialogContent');
 document.querySelector('.dialog__close').onclick = () => dialog.close();
+dialog.addEventListener('close', () => dialog.removeAttribute('aria-labelledby'));
 document.querySelector('#sourcesButton').onclick = () => {
   content.innerHTML = `<div class="dialog__inner"><div class="eyebrow eyebrow--dark">SOURCES & ASSUMPTIONS</div><h2>What this planner is based on</h2><p>Confirmed reservations come from the uploaded booking documents or details you supplied. Activity, food, language, map and health/safety information uses public information checked on 26 Sep 2026; the tasting list and FX implementation were checked on 4 Oct 2026; Cape Town activity and operator details were checked on 5 Oct 2026; the Bree Street guide was checked on 10 Oct 2026; the latest booking status was checked on 7 Oct 2026.</p><ul class="source-list">${sources.map(s => `<li>${String(s[1]).startsWith('http') ? `<a href="${s[1]}" target="_blank" rel="noopener">${s[0]} ↗</a>` : `<strong>${s[0]}</strong> — ${s[1]}`}</li>`).join('')}</ul><h3>Assumptions</h3><ul><li>The remaining eight travellers join at Victoria Falls on 18 Jan.</li><li>The group is treated as 10 through the Cape Town stay; the Nelspruit Lodge and FlySafair confirmations each cover 2 adults.</li><li>Only the Cape Town Airport → Franschhoek and Franschhoek → Mountain Marina transfers remain to arrange.</li><li>Cape Town travel times start and end at Mountain Marina in the V&A Waterfront and are estimates, not booking guarantees.</li><li>Wine Tram routes/times, activity operating conditions and health/travel advice must be reconfirmed closer to January 2027.</li></ul></div>`;
   dialog.showModal();
